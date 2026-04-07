@@ -1,0 +1,84 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Task Management System</title>
+		<link rel="stylesheet" href="css/styles.css" />
+		<script type="module" src="js/main.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1>Task Management System</h1>
+			<div class="header-right">
+				<div id="stats" class="stats">Showing: 0 | Done: 0 | Overdue: 0</div>
+				<button id="download-backup" title="Download backup JSON">Backup Data</button>
+				<button id="load-backup" title="Load backup JSON">Load Data</button>
+				<button id="add-task">New Task</button>
+			</div>
+		</header>
+		<input type="file" id="file-input" accept=".json" style="display: none" />
+
+		<!-- NEW FILTER BAR -->
+		<div class="filters">
+			<div class="filter-group">
+				<label for="filter-priority">Priority</label>
+				<select id="filter-priority">
+					<option value="all">All Priorities</option>
+					<option value="high">Important</option>
+					<option value="medium">Medium</option>
+					<option value="low">Low</option>
+				</select>
+			</div>
+			<div class="filter-group">
+				<label for="filter-tag">Tag</label>
+				<select id="filter-tag">
+					<option value="all">All Tags</option>
+				</select>
+			</div>
+			<button id="clear-filters">Clear Filters</button>
+		</div>
+
+		<div id="board" class="board"></div>
+
+		<!-- Modal -->
+		<dialog id="task-modal" class="modal">
+			<h2 id="modal-heading">New Task</h2>
+			<form id="task-form">
+				<input type="hidden" id="task-id" />
+				<label>
+					Title <span class="required">*</span>
+					<input type="text" id="task-title" required autocomplete="off" />
+				</label>
+				<label>
+					Description
+					<textarea id="task-desc" rows="3"></textarea>
+				</label>
+				<div class="form-row">
+					<label>
+						Priority
+						<select id="task-priority">
+							<option value="low">Low</option>
+							<option value="medium" selected>Medium</option>
+							<option value="high">Important</option>
+						</select>
+					</label>
+					<label>
+						Due Date <span class="required">*</span>
+						<input type="date" id="task-due" required />
+					</label>
+				</div>
+				<label>
+					Labels (comma separated)
+					<input type="text" id="task-labels" placeholder="work, life, school" />
+				</label>
+				<div class="modal-buttons">
+					<button type="button" id="modal-cancel">Cancel(Esc)</button>
+					<button type="submit" id="modal-save">Save Task</button>
+				</div>
+			</form>
+		</dialog>
+	</body>
+</html>
